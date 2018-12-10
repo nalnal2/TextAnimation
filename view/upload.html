@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <link rel="stylesheet" href="css/styles.css"/>
+        <title>Text Animation</title>
+    </head>
+    <body>
+        <div id="header">
+            <h1 id="pageTitle">&nbsp;Text Animation</h1>
+            <h3 id="version">&nbsp;     &nbsp;&nbsp;     &nbsp;&nbsp;     &nbsp;&nbsp;     &nbsp;&nbsp;     &nbsp;&nbsp;     &nbsp;&nbsp;     &nbsp;&nbsp;     &nbsp;&nbsp;     &nbsp;&nbsp;     &nbsp;&nbsp;     &nbsp;&nbsp;     &nbsp;&nbsp;     &nbsp;&nbsp;     &nbsp;&nbsp;     &nbsp;&nbsp;     &nbsp;version 0.7B</h3>
+        </div>
+        <div id="changePage">
+            <div id="nav">
+                <nav id="cssmenu">
+                    <ul>
+                        <li><a id="nav1" href="http://192.168.17.1:3000/home">HOME</a></li>
+                        <li><a id="nav2" href="http://192.168.17.1:3000/upload">입력</a></li>
+                        <li><a id="nav3" href="http://192.168.17.1:3000/result">결과</a></li>
+                        <li><a id="nav4" href="http://192.168.17.1:3000/help">HELP</a></li>
+                    </ul>
+                </nav>
+            </div><br>
+            <div id="languageSelect">
+                <font style="font-weight: bold">[언어 선택]&nbsp;</font>
+                <label for="lang-kr">한국어</label>
+                <input type="radio" id="lang-kr" name="document-lang" value="lang-kr" onclick="setDocumentLang('kr')">&nbsp;&nbsp;
+                <label for="lang-en">영어</label>
+                <input type="radio" id="lang-en" name="document-lang" value="lang-en" onclick="setDocumentLang('en')">
+            </div><br>
+            <div id="inputsection">
+                <form action="upload_manual" method="post" enctype="multipart/form-data">
+                    <font style="font-weight: bold">[텍스트 파일]&nbsp;</font>
+                    <input type="file" name="userfile_text"><br>
+                    <font style="font-weight: bold">[주제어 파일]&nbsp;</font>
+                    <input type="file" name="userfile_keyword">
+                    <input type="submit">
+                </form><br><br>
+                <h2>*** 자동 주제어 분석</h2>
+                <form action="upload" method="post" enctype="multipart/form-data">
+                    <font style="font-weight: bold">[텍스트 파일]&nbsp;</font>
+                    <input type="file" name="userfile">
+                    <input type="submit">
+                </form>
+            </div>
+        </div>
+    </body>
+    <script>
+        var socket = io.connect();
+
+        function setDocumentLang(lang) {
+            socket.emit("set document language", lang);
+        }
+    </script>
+</html>

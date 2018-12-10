@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+    <meta charset="utf-8">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.2.min.js"></script>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="http://d3js.org/d3.v4.min.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="/script/force_new.js"></script>
+        <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <title>Text Animation</title>
+    </head>
+    <body>
+        <div id="header">
+            <h1 id="pageTitle">&nbsp;Text Animation</h1>
+            <h3 id="version">&nbsp;    &nbsp;&nbsp;    &nbsp;&nbsp;    &nbsp;&nbsp;    &nbsp;&nbsp;    &nbsp;
+                &nbsp;    &nbsp;&nbsp;    &nbsp;&nbsp;    &nbsp;&nbsp;    &nbsp;&nbsp;    &nbsp;&nbsp;    &nbsp;
+                &nbsp;    &nbsp;&nbsp;    &nbsp;&nbsp;    &nbsp;&nbsp;    &nbsp;&nbsp;    &nbsp;version 0.8B</h3>
+        </div>
+        <div id="changePage">
+            <div id="nav">
+                <nav id="cssmenu">
+                    <ul>
+                        <li><a id="nav1" href="http://192.168.17.1:3000/home">HOME</a></li>
+                        <li><a id="nav2" href="http://192.168.17.1:3000/upload">입력</a></li>
+                        <li><a id="nav3" href="http://192.168.17.1:3000/result">결과</a></li>
+                        <li><a id="nav4" href="http://192.168.17.1:3000/help">HELP</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div id="section">
+            <text class="optionTitleFont">Input File Info.</text>
+            <div id="Basic_infoBox" class="optionDescriptionFont infobox">
+                <table style="border: 0">
+                    <tr>
+                        <td width="80px">문서명</td>
+                        <td><input id="opt-title" type="text" value="Null" class="basic-data" disabled></td>
+                    </tr>
+                    <tr>
+                        <td>문장 수</td>
+                        <td><input id="opt-line" type="text" value="Null" class="basic-data" disabled></td>
+                    </tr>
+                    <tr>
+                        <td>단어 수</td>
+                        <td><input id="opt-word" type="text" value="Null" class="basic-data" disabled></td>
+                    </tr>
+                    <tr>
+                        <td>주제어 수</td>
+                        <td><input id="opt-keyword" type="text" value="Null" class="basic-data" disabled></td>
+                    </tr>
+                </table>
+            </div>
+            <hr class="garo">
+            <text class="optionTitleFont">Graph Info.</text>
+            <div id="Graph_infoBox" class="optionDescriptionFont infobox">
+                <table style="border: 0">
+                    <tr>
+                        <td width="170px">Vertex 수</td>
+                        <td><input id="graph-vertex" type="text" value="Null" class="graph-data" size="7" disabled></td>
+                    </tr>
+                    <tr>
+                        <td>Edge 수</td>
+                        <td><input id="graph-edge" type="text" value="Null" class="graph-data" size="7" disabled></td>
+                    </tr>
+                </table><br>
+                <table border="1">
+                    <tr>
+                        <th width="80px" bgcolor="#D3D3CD" style="font-weight: normal"></th>
+                        <th width="55px" bgcolor="#D3D3CD" style="font-weight: normal">MAX</th>
+                        <th width="55px" bgcolor="#D3D3CD" style="font-weight: normal">AVG</th>
+                        <th width="55px" bgcolor="#D3D3CD" style="font-weight: normal">MIN</th>
+                    </tr>
+                    <tr>
+                        <th width="80px" bgcolor="#D3D3CD" style="font-weight: normal">Vertex Weight</th>
+                        <th id="v-weight-max" class="weight-data" width="55px"></th>
+                        <th id="v-weight-avg" class="weight-data" width="55px"></th>
+                        <th id="v-weight-min" class="weight-data" width="55px"></th>
+                    </tr>
+                    <tr>
+                        <th width="80px" bgcolor="#D3D3CD" style="font-weight: normal">Edge Weight</th>
+                        <th id="e-weight-max" class="weight-data" width="55px"></th>
+                        <th id="e-weight-avg" class="weight-data" width="55px"></th>
+                        <th id="e-weight-min" class="weight-data" width="55px"></th>
+                    </tr>
+                </table>
+            </div>
+            <hr class="garo">
+            <text class="optionTitleFont">Drawing Method</text>
+            <div id="DM_infoBox" class="optionDescriptionFont infobox">
+                <form action="">
+                    <input id="radio-graph" type="radio" name="drawMode" value="graph" checked>Graph
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    &nbsp;
+                    <input id="radio-mst" type="radio" name="drawMode" value="mst"><span style="padding-right: 8px">MST
+                    </span><br>
+                    <input id="check-single" type="checkbox" name="single" value="single" checked>Remove single-vertex
+                </form>
+            </div>
+            <hr class="garo">
+            <text class="optionTitleFont">Control Option</text>
+            <div id="CO_Box" class="optionDescriptionFont infobox">
+                <!-- vertex 개수 조절 옵션 -->
+                <form action="">
+                    <text>Vertex 수: &nbsp;</text>
+                    <select id="nodeNrange" class="control-data" style="width: 80px" onchange="showCalculatedEdgeNum()">
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20" selected="selected">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                        <option value="24">24</option>
+                        <option value="25">25</option>
+                        <option value="26">26</option>
+                        <option value="27">27</option>
+                        <option value="28">28</option>
+                        <option value="29">29</option>
+                        <option value="30">30</option>
+                    </select>
+                    <input id="nonsingle-vertex-num" class="control-data" type="text" style="width: 50px" value="" disabled>
+                    <font size="1">(싱글X)</font>
+                </form>
+                <!-- link 개수 조절 옵션 -->
+                <form action="">
+                    <text>Edge 수:&nbsp; &nbsp;</text>
+                    <select id="linkNrange" class="control-data" style="width: 80px" onchange="showCalculatedEdgeNum()">
+                        <option value="1" selected="selected">0.5*N</option>
+                        <option value="2">N-1</option>
+                        <option value="3">1.5*N</option>
+                        <option value="4">2*N</option>
+                    </select>
+                    <input id="calculated-edge-num" class="control-data" type="text" style="width: 50px" value="10" disabled><br>
+                    <text>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N: vertex 수)</text>
+                </form>
+
+                <script>
+                    function showCalculatedEdgeNum() {
+                        var newValue;
+                        var target1 = document.getElementById("nodeNrange");
+                        nodeNum = target1.options[target1.selectedIndex].value;
+                        var target2 = document.getElementById("linkNrange");
+                        linkNum = target2.options[target2.selectedIndex].value;
+                        switch (linkNum) {
+                            case '1':
+                                newValue = Math.floor(nodeNum / 2);
+                                break;
+                            case '2':
+                                newValue = nodeNum - 1;
+                                break;
+                            case '3':
+                                newValue = Math.floor(nodeNum * 1.5);
+                                break;
+                            case '4':
+                                newValue = nodeNum * 2;
+                                break;
+                        }
+                        document.getElementById("calculated-edge-num").value = newValue;
+                    }
+                </script>
+            </div>
+        </div>
+        <div id="graph-div">
+            <div id="graph-info" style="padding-left: 30px; padding-top: 20px">
+                <table border="0">
+                    <tr>
+                        <td id="graph-title" class="graph-info-data"></td>
+                        <td id="graph-line" class="graph-info-data"></td>
+                        <td id="graph-dm" class="graph-info-data"></td>
+                        <td id="graph-word" class="graph-info-data"></td>
+                        <td id="graph-keyword" class="graph-info-data"></td>
+                        <td id="graph-vn" class="graph-info-data"></td>
+                        <td id="graph-en" class="graph-info-data"></td>
+                        <td id="frame" class="graph-info-data"></td>
+                    </tr>
+                </table>
+            </div>
+            <div id="buttonTray">
+                <button class="btn btn-default btn-lg" onclick="redrawGraph()" style="top: 80px; left: 0">Show Graph</button>
+                <button class="btn btn-default btn-lg" onclick="redrawGraph()" style="top: 80px; left: 400px">Show Graph</button>
+            </div>
+            <graph id="graph" class="graph"></graph>
+        </div>
+        <div id="tts-div">
+            <text class="optionTitleFont">Animation</text><br><br>
+            <div id="Animation_Box" class="optionDescriptionFont infobox" style="padding-top: 0">
+                <form action="">
+                    <input id="check-tts" name="tts" type="checkbox" value="tts">TTS
+                </form>
+                <p>
+                    <font>Range: </font>
+                    <font color="#005eff" style="font-weight: bold; font-style: italic">line </font>
+                    <input id="amount1" onkeyup="setSRange()" type="text" style="width: 25%; border: 0; color: #005eff; font-weight: bold; font-size: 15px; font-style: italic; text-align: center">
+                    <font color="#005eff" style="font-weight: bold; font-style: italic"> - line </font>
+                    <input id="amount2" onkeyup="setSRange()" type="text" style="width: 25%; border: 0; color: #005eff; font-weight: bold; font-size: 15px; font-style: italic; text-align: center">
+                </p>
+                <div id="slider-range"></div>
+                <table id="slider-headNtail" border="0" width="100%">
+                    <tr>
+                        <td id="sRange-head" style="text-align: left"></td>
+                        <td id="sRange-tail" style="text-align: right"></td>
+                    </tr>
+                </table>
+                <br>
+                <font>Unit:&nbsp;</font>
+                <select id="sRange-unit" class="control-data" style="width: 80px" onchange="setRangeUnit()">
+                    <option value="20" selected="selected">20</option>
+                    <option value="40">40</option>
+                    <option value="60">60</option>
+                    <option value="80">80</option>
+                    <option value="100">100</option>
+                    <option value="150">150</option>
+                    <option value="200">200</option>
+                    <option value="250">250</option>
+                    <option value="300">300</option>
+                    <option value="350">350</option>
+                    <option value="400">400</option>
+                </select><br><br>
+                <button id="btn-animate" class="btn btn-default btn-lg" onclick="showAnimation()">Animate</button><br>
+                <!-- <input id="jsonpath" type="text" value="">
+                <button id="btn-specific" class="btn btn-default btn-lg" onclick="redrawGraph_specific()">Show Graph</button> -->
+            </div>
+            <hr class="garo">
+            <text class="optionTitleFont">Script</text><br><br>
+            <div id="Script_Box" class="optionDescriptionFont infobox" style="padding-top: 0">
+                <div id="progress-div">
+                    <div id="progressBar">
+                        <div id="progress-val"></div>
+                    </div>
+                </div><br>
+                <textarea id="part-text" cols="40" rows="10" style="border: 0; background: #f2f2f2" disabled></textarea>
+                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            </div>
+        </div>
+    </body>
+</html>
