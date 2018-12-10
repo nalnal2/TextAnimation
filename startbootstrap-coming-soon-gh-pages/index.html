@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+        <title>Text Animation</title>
+
+        <!-- Bootstrap core CSS -->
+        <link href="/startbootstrap-coming-soon-gh-pages/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Custom fonts for this template -->
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+        <link href="/startbootstrap-coming-soon-gh-pages/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+        <!-- Custom styles for this template -->
+        <link href="/startbootstrap-coming-soon-gh-pages/css/coming-soon.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/styles.css">
+    </head>
+    <body>
+        <div class="overlay"></div>
+
+        <div class="masthead">
+            <div class="masthead-bg"></div>
+            <div class="container h-100">
+                <div class="row h-100">
+                    <div class="col-12 my-auto">
+                        <div class="masthead-content text-white py-5 py-md-0">
+                            <!-- <h3 style="color: #FFFFFF; text-shadow: 2px 2px #434851">Don't read, Do</h3> -->
+                            <h1 class="mb-3" style="color: #17376b; text-shadow: 2px 2px #FFFFFF">Text Animation!</h1>
+                            <p class="mb-5" style="font-weight: bold; color: #17376b; text-shadow: 2px 2px #FFFFFF">We visually express the variation of relationship among document's keywords by the animation of keyword social network.</p>
+                            <div id="languageSelect">
+                                <button id="lang-kr" class="btn btn-default btn-lg" name="document-lang" value="lang-kr" onclick="setDocumentLang('kr')">Korean</button>
+                                <button id="lang-en" class="btn btn-default btn-lg" name="document-lang" value="lang-en" onclick="setDocumentLang('en')">English</button>
+                            </div>
+
+                            <!-- <div id="languageSelect">
+                                <button id="lang-kr" style="background: 'white'" name="document-lang" value="lang-kr" onclick="setDocumentLang('kr')">Korean</button>
+                                <button id="lang-en" style="background: 'white'" name="document-lang" value="lang-en" onclick="setDocumentLang('en')">English</button>
+                            </div><br> -->
+
+                            <div id="inputsection">
+                                <form action="upload_manual" method="post" enctype="multipart/form-data">
+                                    <input class="upload-name-text" style="display: inline-block; padding: .5em .75em; font-size: inherit; font-family: inherit; line-height: normal; vertical-align: middle; background-color: #f5f5f5; border: 1px solid #ebebeb; border-bottom-color: #e2e2e2; border-radius: .25em; -webkit-appearance: none; -moz-appearance: none; appearance: none;" value="Select the text-file." type="text" disabled>
+                                    <label id="label_text" class="upload-label" style="font-weight: 400; display: inline-block; padding: .5em .75em; color: #333; font-size: inherit; line-height: normal; vertical-align: middle; background-color: #fff; cursor: pointer; border: 1px solid #ccc; border-bottom-color: #e2e2e2; border-radius: .25em;" for="userfile_text">Browse</label>
+                                    <input id="userfile_text" class="upload-hidden-text" style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0;" type="file" name="userfile_text"><br>
+
+                                    <input class="upload-name-key" style="display: inline-block; padding: .5em .75em; font-size: inherit; font-family: inherit; line-height: normal; vertical-align: middle; background-color: #f5f5f5; border: 1px solid #ebebeb; border-bottom-color: #e2e2e2; border-radius: .25em; -webkit-appearance: none; -moz-appearance: none; appearance: none;" value="Select the keyword-file." type="text" disabled>
+                                    <label id="label_key" class="upload-label" style="font-weight: 400; display: inline-block; padding: .5em .75em; color: #333; font-size: inherit; line-height: normal; vertical-align: middle; background-color: #fff; cursor: pointer; border: 1px solid #ccc; border-bottom-color: #e2e2e2; border-radius: .25em;" for="userfile_keyword">Browse</label>
+                                    <input id="userfile_keyword" class="upload-hidden-key" style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0;" type="file" name="userfile_keyword">
+                                    <br><br>
+                                    <button id="btn-upload" class="btn btn-default btn-lg">Check it!</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="social-icons">
+            <ul class="list-unstyled text-center mb-0">
+                <li class="list-unstyled-item">
+                    <a href="#">
+                        <i class="fa fa-twitter"></i>
+                    </a>
+                </li>
+                <li class="list-unstyled-item">
+                    <a href="#">
+                        <i class="fa fa-facebook"></i>
+                    </a>
+                </li>
+                <li class="list-unstyled-item">
+                    <a href="#">
+                        <i class="fa fa-instagram"></i>
+                    </a>
+                </li>
+              </ul>
+        </div> -->
+        <div class="social-icons">
+            <ul class="list-unstyled text-center mb-0">
+                <li class="list-unstyled-item">
+                    <button id="btn-help" style="width: 80px; height: 80px; border-radius: 40px" class="btn btn-default btn-lg">HELP</button>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Bootstrap core JavaScript -->
+        <script src="/startbootstrap-coming-soon-gh-pages/vendor/jquery/jquery.min.js"></script>
+        <script src="/startbootstrap-coming-soon-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Plugin JavaScript -->
+        <script src="/startbootstrap-coming-soon-gh-pages/vendor/vide/jquery.vide.min.js"></script>
+
+        <!-- Custom scripts for this template -->
+        <script src="/startbootstrap-coming-soon-gh-pages/js/coming-soon.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                var fileTarget1 = $(".upload-hidden-text");
+                var fileTarget2 = $(".upload-hidden-key");
+
+                fileTarget1.on("change", function () {
+                    if (window.FileReader) {
+                        var filename = $(this)[0].files[0].name;
+                    } else {
+                        var filename = $(this).val().split('/').pop().split('\\').pop();
+                    }
+                    $(this).siblings(".upload-name-text").val(filename);
+                });
+
+                fileTarget2.on("change", function () {
+                    if (window.FileReader) {
+                        var filename = $(this)[0].files[0].name;
+                    } else {
+                        var filename = $(this).val().split('/').pop().split('\\').pop();
+                    }
+                    $(this).siblings(".upload-name-key").val(filename);
+                });
+
+                $("#label_text").hover(function () {
+                    $(this).css("background-color", "#898989");
+                    $(this).css("color", "#fff");
+                }, function () {
+                    $(this).css("background-color", "#fff");
+                    $(this).css("color", "#333");
+                });
+                $("#label_key").hover(function () {
+                    $(this).css("background-color", "#898989");
+                    $(this).css("color", "#fff");
+                }, function () {
+                    $(this).css("background-color", "#ffffff");
+                    $(this).css("color", "#333")
+                });
+            });
+        </script>
+
+        <script>
+            var socket = io.connect();
+            var button_kr = document.getElementById("lang-kr");
+            var button_en = document.getElementById("lang-en");
+
+            function setDocumentLang(lang) {
+                console.log("set document language " + lang);
+                socket.emit("set document language", lang);
+
+                if (lang == 'kr') {
+                    button_kr.style.color = "#FFFFFF";
+                    button_kr.style.background = "#898989";
+                    button_en.style.color = "#333333";
+                    button_en.style.background = "#FFFFFF";
+                } else {
+                    button_kr.style.color = "#333333";
+                    button_kr.style.background = "#FFFFFF";
+                    button_en.style.color = "#FFFFFF";
+                    button_en.style.background = "#898989";
+                }
+            }
+        </script>
+    </body>
+
+</html>
