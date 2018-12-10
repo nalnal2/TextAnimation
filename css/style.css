@@ -1,0 +1,381 @@
+@import url('https://fonts.googleapis.com/css?family=Mali:500,700|Noto+Serif+KR:300,400,700');
+
+body {
+    font-family: 'Mali', 'Noto Serif KR'
+}
+
+table.fixed {
+    table-layout: fixed;
+}
+
+hr.garo {
+    border: solid #7D7D7D;
+    border-width: 1px 0 0;
+}
+
+.optionTitleFont {
+    font-weight: bold;
+    font-size: large;
+}
+
+.infobox {
+    padding: 20px;
+}
+
+.weight-data {
+    background: #f0f0f0;
+    color: #005eff;
+    font-weight: bold;
+    font-style: italic;
+    text-align: right;
+}
+
+.graph-data {
+    color: #005eff;
+    font-weight: bold;
+    font-style: italic;
+    text-align: right;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.basic-data {
+    color: #005eff;
+    font-weight: bold;
+    font-style: italic;
+    text-align: right;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.control-data {
+    color: #07066f;
+    font-weight: bold;
+    text-align: right;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.control-data#calculated-edge-num,
+.control-data#nonsingle-vertex-num {
+    color: #005eff;
+    font-weight: bold;
+    font-style: italic;
+    text-align: right;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.info-data {
+    width: 100px;
+    box-sizing: border-box;
+    color: #005eff;
+    font-weight: bold;
+    font-style: italic;
+    text-align: right;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.info-data#opt-title {
+    width: 150px;
+}
+
+.graph-info-data {
+    color: #438aac;
+    font-weight: bold;
+    font-style: italic;
+    text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.btn {
+    display:inline-block;
+    position: relative;
+    padding:6px 12px;
+    margin-bottom:37px;
+    font-size:14px;
+    font-weight:400;
+    line-height:1.42857143;
+    text-align:center;
+    white-space:nowrap;
+    vertical-align:middle;
+    -ms-touch-action:manipulation;
+    touch-action:manipulation;
+    cursor:pointer;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+    background-image:none;
+    border:1px solid transparent;
+    border-radius:4px;
+}
+
+.btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus {
+    outline:thin dotted;
+    outline:5px auto -webkit-focus-ring-color;
+    outline-offset:-2px;
+}
+
+.btn.focus, .btn:focus, .btn:hover {
+    background: #3f7894;
+    color:#fff;
+    text-decoration:none;
+}
+
+.btn.active, .btn:active {
+    background-image:none;outline:0;
+    -webkit-box-shadow:inset 0 3px 5px rgba(0,0,0,.125);
+    box-shadow:inset 0 3px 5px rgba(0,0,0,.125);
+}
+
+.btn.disabled, .btn[disabled], fieldset[disabled] .btn  {
+    pointer-events:none;
+    cursor:not-allowed;
+    filter:alpha(opacity=65);
+    -webkit-box-shadow:none;
+    box-shadow:none;opacity:.65
+}
+
+.btn-lg {
+    padding:10px 16px;
+    font-size:18px;
+    line-height:1.3333333;
+    border-radius:6px;
+}
+
+.btn-default {
+    color:#333;
+    background-color:#fff;
+    border-color:#ccc;
+}
+
+.upload-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+.upload-label {
+    display: inline-block;
+    padding: .5em .75em;
+    color: #999;
+    font-size: inherit;
+    line-height: normal;
+    wertical-align: middle;
+    background-color: #fdfdfd;
+    cursor: pointer;
+    border: 1px solid #ebebeb;
+    border-bottom-color: #e2e2e2;
+    border-radius: .25em;
+}
+
+.upload-name {
+    display: inline-block;
+    padding: .5em .75em;
+    font-size: inherit;
+    font-family: inherit;
+    line-height: normal;
+    vertical-align: middle;
+    background-color: #f5f5f5;
+    border: 1px solid #ebebeb;
+    border-bottom-color: #e2e2e2;
+    border-radius: .25em;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+#progress-div {
+  position: relative;
+  width: 100%;
+  height: 30px;
+  background-color: #ddd;
+}
+
+#progressBar {
+  position: absolute;
+  width: 0%;
+  height: 100%;
+  background-color: #4d535c;
+}
+
+#progress-val {
+  text-align: center;
+  line-height: 30px;
+  color: white;
+}
+
+#pageTitle {
+    font-size: 60px;
+    margin-top: 20px;
+    margin-bottom: 0
+}
+
+#version {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+#section {
+    background-color: #b2e4f8;
+    position: relative;
+    width: 22%;
+    height: 750px;
+    padding: 10px;
+    overflow: auto;
+    float: left;
+    border-radius: 10px;
+}
+
+#graph-div {
+    position: relative;
+    box-sizing: border-box;
+    background: #172d37;
+    float: left;
+    width: 50%;
+    height: 770px;
+    border-radius: 10px;
+    border-style: double;
+    border-color: #f5f8f2;
+    border-width: 5px;
+}
+
+#buttonTray {
+    z-index: 2;
+    position: relative;
+    left: 10%;
+    top: 560px;
+}
+
+#tts-div {
+    background-color: #b2e4f8;
+    position: relative;
+    width: 25%;
+    height: 750px;
+    padding: 10px;
+    float: left;
+    border-radius: 10px;
+}
+
+#cssmenu,
+#cssmenu ul,
+#cssmenu ul li,
+#cssmenu ul li a {
+    margin-bottom:0px;
+    padding: 0px;
+    border: 0;
+    list-style: none;
+    line-height: 1;
+    display: block;
+    position: relative;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+#cssmenu:after
+#cssmenu > ul:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}
+#cssmenu {
+    width: auto;
+    height: 45px;
+    border-bottom: 0px solid #000000;
+    margin-bottom: 0px;
+    font-family: sans-serif;
+    line-height: 1;
+}
+#cssmenu ul {
+    background: #ffffff;
+}
+#cssmenu > ul > li {
+    float: left;
+}
+#cssmenu.align-center > ul {
+    font-size: 0;
+    text-align: center;
+}
+#cssmenu.align-center > ul > li {
+    display: inline-block;
+    float: none;
+}
+#cssmenu.align-right > ul > li {
+    float: right;
+}
+#cssmenu.align-right > ul > li > a {
+    margin-right: 0;
+    margin-left: -4px;
+}
+#cssmenu > ul > li > a {
+    z-index: 2;
+    padding: 15px 25px 15px 25px;
+    font-size: 15px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #264781;
+    -webkit-transition: all .2s ease;
+    -moz-transition: all .2s ease;
+    -ms-transition: all .2s ease;
+    -o-transition: all .2s ease;
+    transition: all .2s ease;
+    margin-right: -4px;
+}
+#cssmenu > ul > li.active > a,
+#cssmenu > ul > li:hover > a,
+#cssmenu > ul > li > a:hover {
+    color: #f9eedc;
+}
+
+#nav1:after {
+    background: #e9ecf2;
+}
+
+#nav2:after {
+    background: #d3dae5;
+}
+
+#nav3:after {
+    background: #bdc7d9;
+}
+
+#nav4:after {
+    background: #a8b5cc;
+}
+
+#cssmenu > ul > li > a:after {
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    right: 0;
+    z-index: -1;
+    width: 100%;
+    height: 95%;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 3px;
+    content: "";
+    -webkit-transition: all .2s ease;
+    -o-transition: all .2s ease;
+    transition: all .2s ease;
+    -webkit-transform: perspective(5px) rotateX(2deg);
+    -webkit-transform-origin: bottom;
+    -moz-transform: perspective(5px) rotateX(2deg);
+    -moz-transform-origin: bottom;
+    transform: perspective(300px) rotateX(30deg);
+    transform-origin: right;
+}
+#cssmenu > ul > li.active > a:after,
+#cssmenu > ul > li:hover > a:after,
+#cssmenu > ul > li > a:hover:after {
+    background: #264781;
+}
